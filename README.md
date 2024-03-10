@@ -24,12 +24,13 @@ mkdir -p $XAI_TORCH_OUTPUT_DIR
 mkdir -p $XAI_TORCH_CACHE_DIR
 ```
 
-# Run the analysis for generating AOPC metrics alexnet model on tobacco3482 dataset
+# Analysis
+Run the analysis for generating AOPC metrics alexnet model on tobacco3482 dataset
 ```
 ./scripts/analyze.sh +analysis_v1=base_analysis/tobacco3482/alexnet
 ```
 
-# Run the analysis for generating Sensitivity, Infidelity and Continuity metrics alexnet model on tobacco3482 dataset
+Run the analysis for generating Sensitivity, Infidelity and Continuity metrics alexnet model on tobacco3482 dataset
 ```
 ./scripts/analyze.sh +analysis_v2=sens_inf_cont/tobacco3482/alexnet
 ```
