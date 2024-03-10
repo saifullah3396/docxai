@@ -1,0 +1,27 @@
+pytorch-ignite
+torchtext
+autopep8
+datasets
+coloredlogs
+scikit-image
+timm==0.6.7
+Pillow
+hydra-core
+optuna
+dataclasses
+pycocotools
+dacite
+datadings
+scikit-learn
+opencv-python
+bs4
+lxml
+torchinfo
+pynvml
+tensorboardX
+transformers
+efficientnet_pytorch
+captum
+lime
+munkres
+click==8.0.1 # required for black
