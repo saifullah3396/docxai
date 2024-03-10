@@ -36,7 +36,6 @@ done
 set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
 
 
-source /netscratch/saifullah/envs/xai_torch/bin/activate
 if [[ $TYPE = @(standard) ]]; then
     if [ "$TYPE" = "standard" ]; then
         python3 $SCRIPT_DIR/../src/docxai/analyzer/analyze.py --config-path `pwd`/cfg $@

@@ -12,13 +12,26 @@ pip install -r requirements.txt
 
 Set PYTHONPATH to match source the directory:
 ```
-export PYTHONPATH=`pwd`/src
+export PYTHONPATH=`pwd`/src:`pwd`/external/xai_torch/src
 ```
 
 Create output directory for holding dataset, models, etc
 ```
-export OUTPUT=</path/to/output/>
-mkdir -p $OUTPUT
+export ROOT_DIR=/<path/to/dataset>/
+export XAI_TORCH_OUTPUT_DIR=</path/to/output/>
+export XAI_TORCH_CACHE_DIR=</path/to/cache/>
+mkdir -p $XAI_TORCH_OUTPUT_DIR
+mkdir -p $XAI_TORCH_CACHE_DIR
+```
+
+# Run the analysis for generating AOPC metrics alexnet model on tobacco3482 dataset
+```
+./scripts/analyze.sh +analysis_v1=base_analysis/tobacco3482/alexnet
+```
+
+# Run the analysis for generating Sensitivity, Infidelity and Continuity metrics alexnet model on tobacco3482 dataset
+```
+./scripts/analyze.sh +analysis_v2=sens_inf_cont/tobacco3482/alexnet
 ```
 
 # Citation

@@ -1,5 +1,5 @@
 dataset_name: tobacco3482
-dataset_dir: ${oc.env:ROOT_DIR}ds/images/Tobacco3482/
+dataset_dir: ${oc.env:ROOT_DIR}/tobacco3482/
 data_cacher_args:
   strategy: datadings
   config:

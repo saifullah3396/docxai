@@ -13,13 +13,3 @@ CONFIGS=(
     "tobacco3482_res2net50_26w_8s $ANALYSIS_SCRIPT +analysis_v2=sens_inf_cont/tobacco3482/res2net50_26w_8s"
     "tobacco3482_dm_nfnet_f1 $ANALYSIS_SCRIPT +analysis_v2=sens_inf_cont/tobacco3482/dm_nfnet_f1"
 )
-# $ANALYSIS_SCRIPT +analysis_v2=sens_inf_cont/tobacco3482/alexnet
-# $ANALYSIS_SCRIPT +analysis_v2=sens_inf_cont/tobacco3482/resnet50
-# $ANALYSIS_SCRIPT +analysis_v2=sens_inf_cont/tobacco3482/inception_v3
-# $ANALYSIS_SCRIPT +analysis_v2=sens_inf_cont/tobacco3482/vgg16
-# $ANALYSIS_SCRIPT +analysis_v2=sens_inf_cont/tobacco3482/efficientnet-b4
-# $ANALYSIS_SCRIPT +analysis_v2=sens_inf_cont/tobacco3482/convnext
-# $ANALYSIS_SCRIPT +analysis_v2=sens_inf_cont/tobacco3482/densenet121
-# $ANALYSIS_SCRIPT +analysis_v2=sens_inf_cont/tobacco3482/mobilenetv3_large_100
-# $ANALYSIS_SCRIPT +analysis_v2=sens_inf_cont/tobacco3482/res2net50_26w_8s
-# $ANALYSIS_SCRIPT +analysis_v2=sens_inf_cont/tobacco3482/dm_nfnet_f1
