@@ -1,5 +1,5 @@
 # The Reality of High Performing Deep Learning Models: A Case Study on Document Image Classification
-This repository contains the evaluation code for the paper [The Reality of High Performing Deep Learning Models: A Case Study on
+This repository contains the code for the paper [The Reality of High Performing Deep Learning Models: A Case Study on
 Document Image Classification] by Saifullah, Stefan Agne, Andreas Dengel, and Sheraz Ahmed.
 
 Requires Python 3+. For evaluation, please follow the steps below.
