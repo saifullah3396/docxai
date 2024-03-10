@@ -1,0 +1,86 @@
+# @package _global_
+defaults:
+ - /args/analyzer_args: default
+ - override /args/model_args: timm_model
+ - override /args/data_args: rvlcdip_224
+
+args:
+  model_args:
+    checkpoint_state_dict_key: model
+    config:
+      model_type: dm_nfnet_f1
+  data_args:
+    data_loader_args:
+      per_device_train_batch_size: 16
+      per_device_eval_batch_size: 16
+      pin_memory: True
+      max_test_samples: 1000
+  analyzer_args:
+    model_checkpoints:
+      - ['baseline', '/netscratch/saifullah/resources/pretrained_models/rvlcdip/dm_nfnet_f1.pt']
+    tasks:
+      # evaluation:
+      #   task_type: generate_metrics
+      #   task_config:
+      #     metrics:
+      #       - accuracy
+      image_attr_analysis:
+        task_type: image_attr_analysis
+        task_config:
+          methods:
+            saliency:
+              batch_size: 100
+              normalize: False
+            input_x_gradient:
+              batch_size: 100
+              normalize: False
+            guided_backprop:
+              batch_size: 100
+              normalize: False
+            deeplift:
+              batch_size: 64
+              apply_baseline: False
+              normalize: False
+            integrated_gradients:
+              batch_size: 64
+              apply_noise_tunnel: False
+              n_steps: 100
+              normalize: False
+            deepshap:
+              batch_size: 64
+              internal_batch_size: 64
+              normalize: False
+            occlusion:
+              batch_size: 64
+              baseline_value: 0
+              strides: [3, 8, 8]
+              sliding_window_shapes: [3, 16, 16]
+              normalize: False
+            lime:
+              batch_size: 64
+              normalize: False
+            kernel_shap:
+              batch_size: 64
+              normalize: False
+          evaluators:
+            attr_map:
+              visualize: False
+              overwrite: False
+            # continuity: {}
+            # infidelity: {}
+            # sensitivity: {}
+            feature_perturbation:
+              overwrite: False
+              perturbation_kwargs:
+                attr_map_grid_cell_size: 16
+                attr_map_reduce_fn: mean
+                # max_perturbation_percentage: 1.0
+                perturbation_step_size: 1
+                max_perturbation_steps: 100
+                eval_batch_size: 256
+                force_gray_to_rgb: True
+                normalize_attributions: false
+                attack_type: black_white_dropout
+                attack_config: {}
+            aopc:
+              overwrite: False

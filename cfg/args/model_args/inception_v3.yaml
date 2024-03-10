@@ -1,0 +1,12 @@
+name: tv_model
+model_task: image_classification
+cache_dir: ${oc.env:XAI_TORCH_CACHE_DIR}/pretrained/
+pretrained: False
+pretrained_checkpoint: null
+checkpoint_state_dict_key: state_dict
+convert_bn_to_gn: false
+config:
+  return_dict: True
+  model_type: inception_v3
+  kwargs:
+    aux_logits: False

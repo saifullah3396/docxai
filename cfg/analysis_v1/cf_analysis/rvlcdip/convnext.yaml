@@ -1,0 +1,49 @@
+# @package _global_
+defaults:
+ - /args/analyzer_args: default
+ - override /args/model_args: convnext_base
+ - override /args/data_args: rvlcdip_384
+
+args:
+  model_args:
+    checkpoint_state_dict_key: model
+  data_args:
+    data_loader_args:
+      per_device_train_batch_size: 32
+      per_device_eval_batch_size: 32
+      pin_memory: True
+  analyzer_args:
+    model_checkpoints:
+      - ['baseline', https://cloud.dfki.de/owncloud/index.php/s/tPwa2dXaywB6dMy/download/docshap_convnext_rvlcdip.ckpt]
+    tasks:
+      # evaluation:
+      #   task_type: generate_metrics
+      #   task_config:
+      #     metrics:
+      #       - accuracy
+      counterfactual_analysis:
+        task_type: image_attr_analysis
+        task_config:
+          methods:
+            deepshap:
+              batch_size: 32
+              internal_batch_size: 16
+              normalize: False
+          evaluators:
+            attr_map:
+              visualize: False
+              overwrite: False
+            feature_perturbation:
+              overwrite: False
+              importance_orders: ['descending']
+              perturbation_kwargs:
+                attr_map_grid_cell_size: 4
+                attr_map_reduce_fn: mean
+                max_perturbation_percentage: 1.0
+                perturbation_step_size: 4
+                eval_batch_size: 32
+                force_gray_to_rgb: True
+                normalize_attributions:
+                terminate_on_misclassification: True
+                attack_type: black_white_switch
+                attack_config: {}

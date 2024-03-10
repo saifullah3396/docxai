@@ -1,0 +1,24 @@
+# @package _global_
+defaults:
+ - /args/analyzer_args: default
+ - override /args/model_args: efficientnet-b4
+ - override /args/data_args: tobacco3482_384
+
+args:
+  model_args:
+    checkpoint_state_dict_key: model
+  data_args:
+    data_loader_args:
+      per_device_train_batch_size: 2
+      per_device_eval_batch_size: 2
+      pin_memory: True
+      max_test_samples: 700
+  analyzer_args:
+    model_checkpoints:
+      - ['baseline', https://cloud.dfki.de/owncloud/index.php/s/RrJTkJdbJ4s4mX7/download/docshap_efficientnet-b4_tobacco.ckpt]
+    tasks:
+      evaluation_final:
+        task_type: generate_metrics
+        task_config:
+          metrics:
+            - accuracy

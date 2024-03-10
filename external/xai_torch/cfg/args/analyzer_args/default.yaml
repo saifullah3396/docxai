@@ -1,0 +1,2 @@
+
+analyzer_output_dir: ${oc.env:XAI_TORCH_OUTPUT_DIR}/analyzer/

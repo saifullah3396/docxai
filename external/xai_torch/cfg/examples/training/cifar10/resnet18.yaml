@@ -1,0 +1,11 @@
+# @package _global_
+defaults:
+ - override /args/model_args: resnet18
+ - override /args/data_args: cifar10
+
+
+args:
+  general_args:
+    overwrite_output_dir: True
+  training_args:
+    experiment_name: cifar10_resnet18

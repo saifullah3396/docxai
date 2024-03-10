@@ -1,0 +1,14 @@
+defaults:
+ - args/general_args: default
+ - args/model_args: resnet18
+ - args/data_args: cifar10
+ - args/training_args: default
+ - override hydra/hydra_logging: disabled
+ - override hydra/job_logging: disabled
+
+hydra:
+  output_subdir: null
+  job:
+    chdir: False
+  run:
+    dir: .

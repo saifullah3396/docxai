@@ -1,0 +1,14 @@
+# @package _global_
+defaults:
+ - /args/analyzer_args: default
+ - override /args/model_args: '???'
+ - override /args/data_args: tobacco3482_224
+ - override /args/training_args: default
+
+args:
+  data_args:
+    data_loader_args:
+      per_device_train_batch_size: 64
+      per_device_eval_batch_size: 64
+  training_args:
+    experiment_name: '???'

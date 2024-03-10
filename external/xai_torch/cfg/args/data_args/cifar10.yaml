@@ -1,0 +1,71 @@
+dataset_name: cifar10
+dataset_dir: ${oc.env:ROOT_DIR}ds/images/cifar10/
+data_cacher_args:
+  # strategy: datadings
+  # config:
+  #   cached_data_name: resized_384x384
+  #   dataset_cache_dir: ${oc.env:XAI_TORCH_CACHE_DIR}/datasets/
+  #   cache_images: True
+  #   cache_resized_images: True
+  #   cache_image_size: [384, 384] # width, height
+  #   cache_encoded_images: True
+  #   load_data_to_ram: False
+  strategy: default
+  config:
+    cached_data_name: cifar10
+    dataset_cache_dir: ${oc.env:XAI_TORCH_CACHE_DIR}/datasets/
+train_aug_args:
+  strategy: basic_image_aug
+  keys:
+    - image
+  config:
+    gray_to_rgb: True
+    normalize: True
+    mean:
+      - 0.4914
+      - 0.4822
+      - 0.4465
+    std:
+      - 0.2023
+      - 0.1994
+      - 0.2010
+eval_aug_args:
+  strategy: basic_image_aug
+  keys:
+    - image
+  config:
+    gray_to_rgb: True
+    normalize:  True
+    mean:
+      - 0.4914
+      - 0.4822
+      - 0.4465
+    std:
+      - 0.2023
+      - 0.1994
+      - 0.2010
+train_val_sampling_args:
+  strategy: random_split
+  config:
+    random_split_ratio: 0.9 # 0.9 train / 0.1 val
+    seed: 42
+data_loader_args:
+  per_device_train_batch_size: 2
+  per_device_eval_batch_size: 2
+  dataloader_drop_last: False
+  shuffle_data: True
+  pin_memory: True
+  dataloader_num_workers: 8
+  use_test_set_for_val: False
+  train_batch_sampler_args:
+    config: {}
+    strategy: ""
+  eval_batch_sampler_args:
+    config: {}
+    strategy: ""
+  max_test_samples: null
+  max_train_samples: null
+  max_val_samples: null
+show_transforms: true
+use_dataset_normalization_params: false
+data_tokenizer_args: null

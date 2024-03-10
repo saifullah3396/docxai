@@ -1,0 +1,68 @@
+# @package _global_
+defaults:
+ - /args/analyzer_args: default
+ - override /args/model_args: vgg16
+ - override /args/data_args: tobacco3482_224
+
+args:
+  model_args:
+    checkpoint_state_dict_key: model
+  data_args:
+    data_loader_args:
+      per_device_train_batch_size: 16
+      per_device_eval_batch_size: 16
+  analyzer_args:
+    model_checkpoints:
+      - ['baseline', https://cloud.dfki.de/owncloud/index.php/s/94tczDK4xqBBFnG/download/docshap_vgg_tobacco.ckpt]
+    tasks:
+      image_attr_analysis:
+        task_type: image_attr_analysis
+        task_config:
+          methods:
+            saliency:
+              batch_size: 100
+              normalize: False
+            input_x_gradient:
+              batch_size: 100
+              normalize: False
+            guided_backprop:
+              batch_size: 100
+              normalize: False
+            deeplift:
+              batch_size: 64
+              apply_baseline: False
+              normalize: False
+            integrated_gradients:
+              batch_size: 64
+              apply_noise_tunnel: False
+              n_steps: 100
+              normalize: False
+            deepshap:
+              batch_size: 64
+              internal_batch_size: 64
+              normalize: False
+            occlusion:
+              batch_size: 16
+              perturbations_per_eval: 64
+              baseline_value: 0
+              strides: [3, 8, 8]
+              sliding_window_shapes: [3, 16, 16]
+              normalize: False
+            lime:
+              batch_size: 64
+              normalize: False
+            kernel_shap:
+              batch_size: 64
+              normalize: False
+          evaluators:
+            attr_map:
+              visualize: False
+              overwrite: False
+            continuity:
+              overwrite: True
+            infidelity:
+              perturbation_noise: 0.1
+              n_perturb_samples: 50
+              overwrite: True
+            sensitivity:
+              overwrite: False

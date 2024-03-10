@@ -1,0 +1,10 @@
+
+analyzer_output_dir: ${oc.env:XAI_TORCH_OUTPUT_DIR}/docxai/
+model_checkpoints:
+  - ['baseline', '']
+tasks:
+  evaluation:
+    task_type: generate_metrics
+    task_config:
+      metrics:
+        - accuracy

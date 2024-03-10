@@ -1,0 +1,14 @@
+# @package _global_
+defaults:
+ - /args/analyzer_args: evaluation
+ - override /args/model_args: timm_model
+ - override /args/data_args: rvlcdip_224
+
+args:
+  model_args:
+    pretrained: False
+    config:
+      return_dict: True
+      model_type: dpn107
+  analyzer_args:
+    model_checkpoints: []

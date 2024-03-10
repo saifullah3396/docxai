@@ -1,0 +1,9 @@
+# @package _global_
+defaults:
+ - override /args/model_args: resnet18
+ - override /args/data_args: mnist
+
+
+args:
+  training_args:
+    experiment_name: mnist_resnet18

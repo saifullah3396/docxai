@@ -1,0 +1,84 @@
+# @package _global_
+defaults:
+ - /args/analyzer_args: default
+ - override /args/model_args: res2net
+ - override /args/data_args: rvlcdip_224
+
+args:
+  model_args:
+    checkpoint_state_dict_key: model
+  data_args:
+    data_loader_args:
+      per_device_train_batch_size: 16
+      per_device_eval_batch_size: 16
+      pin_memory: True
+      max_test_samples: 4000
+  analyzer_args:
+    model_checkpoints:
+      - ['baseline', '/netscratch/saifullah/resources/pretrained_models/rvlcdip/res2net50_26w_8s.pt']
+    tasks:
+      image_attr_analysis:
+        task_type: image_attr_analysis
+        task_config:
+          methods:
+            saliency:
+              batch_size: 48
+              normalize: False
+            input_x_gradient:
+              batch_size: 48
+              normalize: False
+            guided_backprop:
+              batch_size: 48
+              normalize: False
+            deeplift:
+              batch_size: 48
+              apply_baseline: False
+              normalize: False
+            integrated_gradients:
+              batch_size: 48
+              apply_noise_tunnel: False
+              n_steps: 100
+              normalize: False
+            deepshap:
+              batch_size: 10
+              internal_batch_size: 48
+              normalize: False
+            occlusion:
+              batch_size: 16
+              baseline_value: 0
+              strides: [3, 8, 8]
+              sliding_window_shapes: [3, 16, 16]
+              normalize: False
+            lime:
+              batch_size: 48
+              normalize: False
+            kernel_shap:
+              batch_size: 48
+              normalize: False
+          evaluators:
+            attr_map:
+              visualize: False
+              overwrite: False
+            continuity:
+              overwrite: False
+            infidelity:
+              perturbation_noise: 0.1
+              n_perturb_samples: 50
+              overwrite: False
+            sensitivity:
+              overwrite: False
+            feature_perturbation:
+              overwrite: True
+              perturbation_kwargs:
+                attr_map_grid_cell_size: 16
+                attr_map_reduce_fn: mean
+                # max_perturbation_percentage: 1.0
+                perturbation_step_size: 1
+                max_perturbation_steps: 100
+                eval_batch_size: 256
+                force_gray_to_rgb: True
+                normalize_attributions: false
+                attack_type: black_white_dropout
+                attack_config: {}
+            aopc:
+              overwrite: True

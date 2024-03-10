@@ -1,0 +1,55 @@
+# @package _global_
+defaults:
+ - /args/analyzer_args: default
+ - override /args/model_args: resnet18
+ - override /args/data_args: cifar10
+
+
+args:
+  data_args:
+    data_loader_args:
+      max_test_samples: 16
+  analyzer_args:
+    analyzer_output_dir: ${oc.env:XAI_TORCH_OUTPUT_DIR}/analyzer/
+    model_checkpoints:
+      - ['model_1', /netscratch/saifullah/xai_torch/output/image_classification/cifar10/timm_model/cifar10_resnet18/checkpoints/best_checkpoint_2_val-accuracy=0.7622.pt]
+      - ['model_2', /netscratch/saifullah/xai_torch/output/image_classification/cifar10/timm_model/cifar10_resnet18/checkpoints/best_checkpoint_2_val-accuracy=0.7622.pt]
+    tasks:
+      # task1:
+      #   task_type: generate_metrics
+      #   task_config:
+      #     metrics:
+      #       - accuracy
+      #       - confusion_matrix
+      image_attr_analysis_1:
+        task_type: image_attr_analysis
+        task_config:
+          methods:
+            # saliency:
+            #   normalize: false
+            occlusion:
+              normalize: false
+              strides: [3, 4, 4]
+              sliding_window_shapes: [3, 4, 4]
+          evaluators:
+            attr_map:
+              visualize: True
+            continuity: {}
+            infidelity: {}
+            sensitivity: {}
+            feature_perturbation:
+              attr_map_grid_cell_size: 4
+              attr_map_reduce_fn: mean
+              max_perturbation_percentage: 1.0
+              perturbation_step_size: 1
+              max_perturbation_steps: 100
+              eval_batch_size: 32
+              force_gray_to_rgb: True
+              normalize_attributions: True
+              attack_type: basic_attack
+              attack_config: {}
+
+
+
+  model_args:
+    checkpoint_state_dict_key: model

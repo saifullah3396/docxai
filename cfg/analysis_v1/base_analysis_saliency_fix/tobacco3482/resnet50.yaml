@@ -1,0 +1,53 @@
+# @package _global_
+defaults:
+ - /args/analyzer_args: default
+ - override /args/model_args: resnet50
+ - override /args/data_args: tobacco3482_224
+
+args:
+  model_args:
+    checkpoint_state_dict_key: model
+  data_args:
+    data_loader_args:
+      per_device_train_batch_size: 16
+      per_device_eval_batch_size: 16
+      pin_memory: True
+      max_test_samples: 700
+  analyzer_args:
+    model_checkpoints:
+      - ['baseline', https://cloud.dfki.de/owncloud/index.php/s/7DmnWGDNpqcXWPY/download/docshap_resnet50_tobacco.ckpt]
+    tasks:
+      # evaluation:
+      #   task_type: generate_metrics
+      #   task_config:
+      #     metrics:
+      #       - accuracy
+      image_attr_analysis_sfix:
+        task_type: image_attr_analysis
+        task_config:
+          methods:
+            saliency:
+              batch_size: 100
+              normalize: False
+          evaluators:
+            attr_map:
+              visualize: True
+              overwrite: False
+            # continuity: {}
+            # infidelity: {}
+            # sensitivity: {}
+            feature_perturbation:
+              overwrite: False
+              perturbation_kwargs:
+                attr_map_grid_cell_size: 16
+                attr_map_reduce_fn: mean
+                # max_perturbation_percentage: 1.0
+                perturbation_step_size: 1
+                max_perturbation_steps: 100
+                eval_batch_size: 100
+                force_gray_to_rgb: True
+                normalize_attributions: false
+                attack_type: black_white_dropout
+                attack_config: {}
+            aopc:
+              overwrite: True

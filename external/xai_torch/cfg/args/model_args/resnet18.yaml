@@ -1,0 +1,8 @@
+name: timm_model
+model_task: image_classification
+pretrained: True
+cache_dir: ${oc.env:XAI_TORCH_CACHE_DIR}/pretrained/
+config:
+  return_dict: True
+  model_type: resnet18
+  kwargs: {}
